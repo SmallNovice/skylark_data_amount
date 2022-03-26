@@ -1,0 +1,63 @@
+<h1>应用表项</h1>
+
+<h2>查询</h2>
+<div>
+  <%= form_tag("/", method: "get") do %>
+    请输入想要查询的类型：<br>
+    <%= select_tag(:type, options_for_select([['表单', 1], ['流程', 2], ['文章', 3]], 1)) %>
+    <br>
+    <br>
+
+    请输入需要查询的空间（gycsjsj为公园城市建设局）:<br>
+    <%= select_tag(:space, options_for_select([['hezuo', 1], ['gycsjsj', 2], ['zhonghe', 3],
+                                               ['shiyang', 4], ['xiyuan', 5], ['guixi', 6]], 1)) %>
+    <br>
+    <br>
+
+    <%= label_tag(:range_ids, "请输入需要查询的id（格式为: 1,2,3,4,5...）:") %><br>
+    <%= text_field_tag(:range_ids) %>
+    <br>
+    <br>
+
+<!--    请选择开始时间：<br>-->
+    <%#= select_date Date.today, prefix: :start_date_json %>
+    <%= label_tag(:start_date_json, "请选择开始时间：") %><br>
+    <%= text_field_tag(:start_date_json, '--') %>
+    <br>
+    <br>
+
+<!--    请选择结束时间：<br>-->
+    <%#= select_date Date.today, prefix: :end_date_json %>
+    <%= label_tag(:end_date_json, "请选择结束时间：") %><br>
+    <%= text_field_tag(:end_date_json, '--') %>
+    <br>
+    <br>
+    <%= submit_tag("提交") %>
+  <% end %>
+</div>
+<br>
+<br>
+<br>
+
+<table>
+  <thead>
+  <tr>
+    <th>表单名字</th>
+    <th>表单id</th>
+    <th>数据量</th>
+    <th>创建时间</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% if @person.nil? %>
+  <% else %>
+  <% @person.each do |person| %>
+    <tr>
+      <% person.each do |a| %>
+        <td><%= a %></td>
+      <% end %>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+<% end %>
